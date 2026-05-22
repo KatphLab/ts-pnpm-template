@@ -51,25 +51,25 @@ Executes the compiled output from `dist/`.
 
 ## Scripts
 
-| Script              | Description                                                                      |
-| ------------------- | -------------------------------------------------------------------------------- |
-| `pnpm dev`          | Run in development with tsx watch                                                |
-| `pnpm build`        | Compile TypeScript to dist/                                                      |
-| `pnpm start`        | Run compiled output                                                              |
-| `pnpm lint`         | Run ESLint                                                                       |
-| `pnpm lint:fix`     | Fix ESLint issues                                                                |
-| `pnpm typecheck`    | Run TypeScript compiler (no emit)                                                |
-| `pnpm format`       | Format code with Prettier                                                        |
-| `pnpm format:check` | Check formatting                                                                 |
-| `pnpm test`         | Run tests with Vitest                                                            |
-| `pnpm test:ci`      | Run tests with coverage                                                          |
-| `pnpm test:watch`   | Run tests in watch mode                                                          |
-| `pnpm test:coverage`| Run tests with coverage report                                                   |
-| `pnpm check`        | **Full quality gate**: format, lint, typecheck, tests, depcruise, knip, dupcheck |
-| `pnpm fix`          | Auto-fix issues: format, lint, knip                                              |
-| `pnpm depcruise`    | Check architecture boundaries                                                    |
-| `pnpm knip`         | Find unused dependencies/exports                                                 |
-| `pnpm dupcheck`     | Check for code duplication                                                       |
+| Script               | Description                                                                      |
+| -------------------- | -------------------------------------------------------------------------------- |
+| `pnpm dev`           | Run in development with tsx watch                                                |
+| `pnpm build`         | Compile TypeScript to dist/                                                      |
+| `pnpm start`         | Run compiled output                                                              |
+| `pnpm lint`          | Run ESLint                                                                       |
+| `pnpm lint:fix`      | Fix ESLint issues                                                                |
+| `pnpm typecheck`     | Run TypeScript compiler (no emit)                                                |
+| `pnpm format`        | Format code with Prettier                                                        |
+| `pnpm format:check`  | Check formatting                                                                 |
+| `pnpm test`          | Run tests with Vitest                                                            |
+| `pnpm test:ci`       | Run tests with coverage                                                          |
+| `pnpm test:watch`    | Run tests in watch mode                                                          |
+| `pnpm test:coverage` | Run tests with coverage report                                                   |
+| `pnpm check`         | **Full quality gate**: format, lint, typecheck, tests, depcruise, knip, dupcheck |
+| `pnpm fix`           | Auto-fix issues: format, lint, knip                                              |
+| `pnpm depcruise`     | Check architecture boundaries                                                    |
+| `pnpm knip`          | Find unused dependencies/exports                                                 |
+| `pnpm dupcheck`      | Check for code duplication                                                       |
 
 ## Quality Gates
 

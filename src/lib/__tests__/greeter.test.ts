@@ -1,5 +1,5 @@
-import { describe, expect, it } from 'vitest'
 import { buildFarewell, buildGreeting } from '@lib/greeter.js'
+import { describe, expect, it } from 'vitest'
 
 describe('buildGreeting', () => {
   it('returns default greeting', () => {

@@ -1,4 +1,4 @@
-export type GreetingOptions = {
+export interface GreetingOptions {
   readonly name: string
   readonly greeting?: string
 }
