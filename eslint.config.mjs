@@ -115,7 +115,7 @@ const eslintConfig = defineConfig([
         },
       ],
       '@typescript-eslint/prefer-readonly': 'error',
-
+      '@typescript-eslint/ban-ts-comment': 'error',
       // Script project rules
       'unused-imports/no-unused-imports': 'error',
       'boundaries/dependencies': [
@@ -216,10 +216,8 @@ const eslintConfig = defineConfig([
       ],
     },
   },
-  // Allow relative parent imports in test files (tests import the module they test)
-  // Also allow longer test functions and empty function mocks
   {
-    files: ['**/__tests__/**', '**/test-utils/**'],
+    files: ['*.test.ts'],
     rules: {
       'no-restricted-syntax': 'off',
       'max-lines-per-function': 'off',
