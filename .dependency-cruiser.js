@@ -191,6 +191,7 @@ export default {
     doNotFollow: {
       path: ['node_modules'],
     },
+    exclude: String.raw`^\.worktrees/`,
     tsPreCompilationDeps: true,
     tsConfig: {
       fileName: 'tsconfig.json',
