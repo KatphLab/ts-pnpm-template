@@ -1,72 +1,53 @@
-Repo standards
+## Workflow and package management
 
-- See `CODING_GUIDELINES.md` for coding, testing, and secure implementation guidelines.
-
-Rule precedence
-
-- Follow this order when rules conflict: direct user instruction > `AGENTS.md` > `CODING_GUIDELINES.md` > local file conventions.
-- If still unclear, choose smallest safe change and document rationale in PR/commit message.
-
-Repo-specific rules
-
-- Use pnpm only. Run repo scripts with `pnpm`. Do not use `npm`.
-- Respect engine constraint: `node >=24 <25`.
-- Treat `pnpm-lock.yaml` as source of truth. Do not create or update `package-lock.json` or `yarn.lock`.
+- Use pnpm only. Run repo scripts with `pnpm`; do not use `npm`.
 - Do not edit `package.json` manually.
-- This project is TypeScript-only. Do not write `.js` files.
+- Before feature work, verify the branch is not `main` or `master`; if it is, create a descriptive feature branch.
+- For isolated worktrees, use `.worktrees/`.
+- Prefer branch names like `feat/<scope>-<short-desc>`, `fix/<scope>-<short-desc>`, or `chore/<scope>-<short-desc>`.
+- Prefer commits like `<type>(<scope>): <why>` with `feat`, `fix`, `refactor`, `test`, `docs`, or `chore`.
+- Keep commit messages focused on intent and impact, not file-by-file narration.
 
-Project map
+## Protected tooling
 
-- `src/index.ts` — application entry point
-- `src/lib/` — core library modules
-- `src/utils/` — utility helpers
-- `src/config/` — configuration modules
-- `src/types/` — shared TypeScript types
-
-Tooling configuration (NEVER EDIT)
-
-- Never modify tooling configuration files. If checks fail, fix root cause in code instead of bypassing tool.
+- Never modify tooling configuration files. If checks fail, fix the root cause in code instead of bypassing the tool.
 - Forbidden files:
   - `.dependency-cruiser.js`
   - `.jscpd.json`
   - `.prettierrc.json`
   - `.semgrep.yml`
-  - `.npmrc`
   - `eslint.config.mjs`
   - `knip.json`
-  - `lint-staged.config.mjs`
   - `tsconfig.json`
   - `vitest.config.ts`
   - `vitest.setup.ts`
   - `vitest.strict-reporter.ts`
 
-Quality gate
+## Implementation rules
 
-`pnpm check` is the full gate and must pass before claiming work complete. It runs in order:
+- This project is TypeScript-only. Do not write `.js` files.
+- Reuse existing modules and utilities before adding new code.
+- Prefer the smallest correct change, consistent with local patterns.
+- When replacing behavior, remove the obsolete path instead of keeping parallel logic.
+- Every file must be a self-contained module; do not rely on global augmentation across files.
+- Add or update dependencies only when existing repo modules cannot solve the problem cleanly.
+- For each dependency change, include rationale plus security and license impact in the PR or commit.
+- If a change affects public behavior, workflow, configuration, or contributor expectations, update docs in the same change set.
 
-1. `pnpm format` — Prettier
-2. `pnpm lint` — ESLint
-3. `pnpm typecheck` — TypeScript
-4. `pnpm test:ci` — Vitest with coverage
-5. `pnpm depcruise` — dependency-cruiser boundary checks
-6. `pnpm knip` — unused exports / dead code
-7. `pnpm dupcheck` — jscpd duplicate detection
+## Testing and verification
 
-Use `pnpm fix` to auto-apply Prettier and ESLint fixes before running the full gate.
+- Test changes to state transitions, side effects, data contracts, output shape, and error or edge cases.
+- For behavior changes, cover both success and failure paths with targeted tests.
+- Keep per-file coverage at or above 90% for statements, branches, functions, and lines.
+- Do not bypass quality gates, pre-commit hooks, or static-analysis findings.
+- Before claiming work complete, run targeted verification for changed behavior and `pnpm check`.
+- `pnpm check` runs: format, lint, typecheck, Vitest coverage, dependency-cruiser, Knip, and jscpd.
+- Use `pnpm fix` to auto-apply Prettier, ESLint, and Knip fixes before the full gate.
 
-Git workflow
+## Error handling and security
 
-- Before feature work, verify current branch is not `main` or `master`.
-- If it is, create descriptive feature branch before making changes.
-- For worktrees, use .worktrees folder.
-
-Branch and commit conventions
-
-- Prefer branch names like `feat/<scope>-<short-desc>`, `fix/<scope>-<short-desc>`, `chore/<scope>-<short-desc>`.
-- Prefer commit style `<type>(<scope>): <why>` where type is `feat`, `fix`, `refactor`, `test`, `docs`, or `chore`.
-- Keep commit messages focused on intent and impact, not only file-by-file changes.
-
-Documentation updates
-
-- If change affects public behavior, workflow, configuration, or contributor expectations, update docs in same change set.
-- Keep `AGENTS.md` and `CODING_GUIDELINES.md` aligned when rules move or are renamed.
+- Normalize unknown thrown values to `Error` at module boundaries; never rethrow raw `unknown`.
+- Show users safe, actionable messages. Do not expose stack traces or internal identifiers.
+- Preserve useful developer diagnostics: context, failed operation, and safe identifiers.
+- Do not introduce `eval`, the `Function` constructor, unsafe shell execution, or hardcoded secrets.
+- Treat security findings as defects; fix the root cause.
