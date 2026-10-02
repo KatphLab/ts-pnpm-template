@@ -1,6 +1,6 @@
 import { fileURLToPath } from 'node:url'
 import { configDefaults, defineConfig } from 'vitest/config'
-import { strictReporter } from './vitest.strict-reporter'
+import { strictReporter } from './vitest.strict-reporter.ts'
 
 export default defineConfig({
   resolve: {
@@ -21,6 +21,7 @@ export default defineConfig({
     reporters: ['default', strictReporter],
     exclude: [
       ...configDefaults.exclude,
+      '**/dist/**',
       '**/.opencode/**',
       '**/.worktrees/**',
       '**/*.cjs',

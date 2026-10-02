@@ -11,7 +11,7 @@ const TEST_FILE_PATTERNS = [
   /\.test\.[jt]sx?$/,
   /\.spec\.[jt]sx?$/,
   /__tests__\//,
-  /\/\__mocks__\//,
+  /\/__mocks__\//,
   /\.test\.ts\.snap$/,
 ]
 

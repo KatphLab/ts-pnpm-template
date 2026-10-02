@@ -10,13 +10,12 @@
 
 ## Protected tooling
 
-- Never modify tooling configuration files. If checks fail, fix the root cause in code instead of bypassing the tool.
+- Never modify tooling configuration files without asking from user. If checks fail, fix the root cause in code instead of bypassing the tool.
 - Forbidden files:
-  - `.dependency-cruiser.js`
+  - `.dependency-cruiser.ts`
   - `.jscpd.json`
-  - `.prettierrc.json`
+  - `biome.json`
   - `.semgrep.yml`
-  - `eslint.config.mjs`
   - `knip.json`
   - `tsconfig.json`
   - `vitest.config.ts`
@@ -41,8 +40,8 @@
 - Keep per-file coverage at or above 90% for statements, branches, functions, and lines.
 - Do not bypass quality gates, pre-commit hooks, or static-analysis findings.
 - Before claiming work complete, run targeted verification for changed behavior and `pnpm check`.
-- `pnpm check` runs: format, lint, typecheck, Vitest coverage, dependency-cruiser, Knip, and jscpd.
-- Use `pnpm fix` to auto-apply Prettier, ESLint, and Knip fixes before the full gate.
+- `pnpm check` runs: one combined Biome check, typecheck, Vitest coverage, dependency-cruiser, Knip, and jscpd.
+- Use `pnpm fix` to auto-apply Biome and Knip fixes before the full gate.
 
 ## Error handling and security
 

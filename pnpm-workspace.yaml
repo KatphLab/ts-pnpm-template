@@ -1,0 +1,6 @@
+allowBuilds:
+  core-js: false
+  esbuild: false
+  '@swc/core': false
+minimumReleaseAgeExclude:
+  - '@types/node@26.6.4'
