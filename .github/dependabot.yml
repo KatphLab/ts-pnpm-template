@@ -1,0 +1,12 @@
+version: 2
+updates:
+  # Dependabot uses the npm ecosystem for pnpm manifests and lockfiles.
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: weekly
+    # Keep version updates patch-only for production and development dependencies.
+    allow:
+      - dependency-type: all
+        update-types:
+          - version-update:semver-patch

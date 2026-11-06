@@ -14,7 +14,7 @@
     "fix": "biome check --write --error-on-warnings . && pnpm knip:fix",
     "typecheck": "tsc --noEmit",
     "check": "pnpm lint && pnpm typecheck && pnpm test:ci && pnpm depcruise && pnpm knip && pnpm dupcheck",
-    "danger:ci": "danger ci",
+    "danger:ci": "tsc --ignoreConfig dangerfile.ts --module nodenext --target es2024 --skipLibCheck --outDir node_modules/.cache/danger && danger ci --dangerfile node_modules/.cache/danger/dangerfile.js",
     "prepare": "husky",
     "knip": "knip",
     "knip:fix": "knip --fix",
